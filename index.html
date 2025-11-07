@@ -194,6 +194,35 @@
 
 <a href="https://www.youtube.com/@ThatsPerfect-y4o"><button class="Youtube">That's Perfect</button></a> <a href="https://www.youtube.com/@broskiwhy"><button class="Youtube">BroskiWhy</button></a> <a href="Donation.html"><button class="Youtube">Donations</button></a>
 
+
+
+
+<audio id="bg-music" loop>
+  <source src="https://file.garden/aQ16Sa80InNm8CXa/godotstheme.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  const bgMusic = document.getElementById('bg-music');
+
+  // Try autoplay
+  bgMusic.play().catch(() => {
+    console.log('Autoplay blocked, will start on first click.');
+  });
+
+  // Fallback: start music on first click anywhere
+  document.body.addEventListener('click', () => {
+    bgMusic.play();
+  }, { once: true });
+</script>
+
+
+
+
+
+
+
+  
   <script>
     const toggleBtn = document.getElementById('theme-toggle');
     toggleBtn.addEventListener('click', () => {

@@ -205,6 +205,9 @@
 <script>
   const bgMusic = document.getElementById('bg-music');
 
+  // set volume (0.0 - 1.0)
+  bgMusic.volume = 0.2;
+
   // Try autoplay
   bgMusic.play().catch(() => {
     console.log('Autoplay blocked, will start on first click.');
@@ -215,7 +218,6 @@
     bgMusic.play();
   }, { once: true });
 </script>
-
 
 
 

@@ -224,7 +224,24 @@
   }, { once: true });
 </script>
 
+<script>
+let typed = "";
+const secret = "max";
 
+// listen to any key the user types
+document.addEventListener("keyup", (e) => {
+    typed += e.key.toLowerCase();
+
+    // keep only the last N chars
+    if (typed.length > secret.length) typed = typed.slice(-secret.length);
+
+    if (typed === secret) {
+        // redirect current tab to your tracker HTML
+        window.location.href = "thing.html";
+        typed = "";
+    }
+});
+</script>
 
 
 

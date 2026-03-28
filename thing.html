@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sam & Max Tracker</title>
+<style>
+  body {
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        background: linear-gradient(135deg, #ff416c, #ff4b2b, #efa621);
+        color: #ffffff;
+        text-align: center;
+        min-height: 100%;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    h1 {
+        margin: 20px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .episode {
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .episode img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 3px solid transparent;
+    }
+
+    .completed img {
+        filter: grayscale(100%) brightness(0.5);
+        border: 3px solid lime;
+    }
+</style>
+</head>
+<body>
+
+<h1>Sam & Max Tracker</h1>
+
+<div class="grid" id="grid"></div>
+
+<script>
+// 6 episodes
+const count = 6;
+
+// fixed your comma, added 6 unique images
+const images = [
+    "https://static.wikia.nocookie.net/samandmax/images/7/7b/SamBasicPhoto_2_%28STW%29.png/revision/latest?cb=20241008160921",
+    "https://static.wikia.nocookie.net/samandmax/images/2/22/UI_icon_Max.png/revision/latest?cb=20220129153401",
+    "https://static.wikia.nocookie.net/samandmax/images/8/8a/MaxBasicPhoto_2_%28STW_REM%29_%28FIXED%29.png/revision/latest?cb=20250628180832",
+    "https://static.wikia.nocookie.net/samandmax/images/b/b7/UI_Icon_Sam.png/revision/latest?cb=20220129153643",
+    "https://static.wikia.nocookie.net/samandmax/images/7/7b/SamBasicPhoto_1_%28STW_REM%29.png/revision/latest?cb=20241008160919",
+    "https://static.wikia.nocookie.net/samandmax/images/9/92/Sam_portrait.png/revision/latest/scale-to-width-down/1000?cb=20240924130346"
+];
+
+// shuffle function
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
+const grid = document.getElementById("grid");
+let completed = JSON.parse(localStorage.getItem("sammax_progress")) || {};
+
+// shuffle images so each episode is unique
+const shuffledImages = shuffle(images.slice());
+
+for (let i = 1; i <= count; i++) {
+    const div = document.createElement("div");
+    div.classList.add("episode");
+
+    if (completed[i]) div.classList.add("completed");
+
+    div.innerHTML = `
+        <img src="${shuffledImages[i-1]}">
+        <p>Episode ${i}</p>
+    `;
+
+    div.onclick = () => {
+        completed[i] = !completed[i];
+        localStorage.setItem("sammax_progress", JSON.stringify(completed));
+        div.classList.toggle("completed");
+    };
+
+    grid.appendChild(div);
+}
+</script>
+
+</body>
+</html>

@@ -1,256 +1,402 @@
-
-
-
 <!DOCTYPE html>
-
 <html lang="en" data-theme="light">
 <head>
-<!--test thing idk-->
-<p>This is a paragraph.</p>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MandA.com</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Zalando+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --celadon: #99e2b4ff;
-      --celadon-2: #88d4abff;
-      --mint: #78c6a3ff;
-      --mint-2: #67b99aff;
-      --zomp: #56ab91ff;
-      --zomp-2: #469d89ff;
-      --viridian: #358f80ff;
-      --pine-green: #248277ff;
-      --skobeloff: #14746fff;
-      --caribbean-current: #036666ff;
+      --celadon: #99e2b4;
+      --mint: #78c6a3;
+      --zomp: #56ab91;
+      --viridian: #358f80;
+      --caribbean-current: #036666;
+      --true-blue: #0466c8;
+      --sapphire: #0353a4;
+      --yale-blue: #023e7d;
+      --oxford-blue: #002855;
+      --oxford-blue-2: #001845;
+      --delft-blue: #33415c;
+      --paynes-gray: #5c677d;
+      --slate-gray: #7d8597;
+      --cool-gray: #979dac;
 
-      --true-blue: #0466c8ff;
-      --sapphire: #0353a4ff;
-      --yale-blue: #023e7dff;
-      --oxford-blue: #002855ff;
-      --oxford-blue-2: #001845ff;
-      --oxford-blue-3: #001233ff;
-      --delft-blue: #33415cff;
-      --paynes-gray: #5c677dff;
-      --slate-gray: #7d8597ff;
-      --cool-gray: #979dacff;
+      --bg: #f0faf5;
+      --bg-2: #e2f5ec;
+      --card-bg: rgba(255, 255, 255, 0.75);
+      --card-border: rgba(255, 255, 255, 0.9);
+      --primary: #36ab8f;
+      --primary-dark: #2a8f76;
+      --accent: #0466c8;
+      --text: #1a2332;
+      --text-muted: #5c677d;
+      --shadow: rgba(54, 171, 143, 0.18);
+      --shadow-card: rgba(0, 40, 85, 0.10);
+      --hero-from: #56ab91;
+      --hero-to: #0466c8;
 
-      --background: var(--celadon);
-      --card-bg: #e0e0e0;
-      --primary: var(--mint);
-      --secondary: var(--zomp);
-      --text: #222;
-
-      --font-title: 'Open Sans', sans-serif;
-      --font-body: 'Zalando Sans', sans-serif;
-      --radius: 12px;
-      --spacing: 1rem;
+      --font-title: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --radius: 16px;
+      --radius-sm: 10px;
     }
 
     [data-theme="dark"] {
-      --background: var(--oxford-blue);
-      --card-bg: var(--oxford-blue-2);
-      --primary: var(--true-blue);
-      --secondary: var(--sapphire);
-      --text: var(--cool-gray);
+      --bg: #0a1628;
+      --bg-2: #0f1f3d;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.10);
+      --primary: #36ab8f;
+      --primary-dark: #2a8f76;
+      --accent: #3b8fef;
+      --text: #e8f0fe;
+      --text-muted: #8899bb;
+      --shadow: rgba(0, 0, 0, 0.4);
+      --shadow-card: rgba(0, 0, 0, 0.3);
+      --hero-from: #023e7d;
+      --hero-to: #036666;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
 
     body {
-      background-color: var(--background);
+      background-color: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
       margin: 0;
-      padding: var(--spacing);
-      transition: all 0.3s ease;
+      padding: 0;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    h1, h3 {
+    /* ── NAV BAR ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
       font-family: var(--font-title);
-      text-align: center;
-      margin: 0.5em 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
     }
 
+    #theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1.1rem;
+      border: 1.5px solid var(--primary);
+      border-radius: 999px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--primary);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    #theme-toggle:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--hero-from), var(--hero-to));
+      padding: 4rem 2rem 3.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 0.75rem;
+      letter-spacing: -1px;
+      position: relative;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+      font-weight: 500;
+      position: relative;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      margin: 2.5rem 0 0.25rem;
+      letter-spacing: -0.3px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin: 0 0 1.5rem;
+    }
+
+    /* ── GAME GRID ── */
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      max-width: 1000px;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.25rem;
+      padding: 0 1.5rem 2rem;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
     .game-card {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 20px var(--shadow-card);
       overflow: hidden;
       text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
       cursor: pointer;
       text-decoration: none;
       color: inherit;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
     }
 
     .game-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 32px var(--shadow);
     }
 
     .game-card img {
       width: 100%;
-      height: 180px;
+      height: 160px;
       object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .game-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .card-body {
+      padding: 0.9rem 1rem 1.1rem;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .game-title {
-      padding: 15px;
-      font-size: 18px;
-      font-weight: bold;
+      font-family: var(--font-title);
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
     }
 
-    .Youtube {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: var(--primary);
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      text-decoration: none;
-      transition: background 0.3s ease;
+    /* ── LINK BUTTONS ── */
+    .links-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem 2.5rem;
     }
 
-    .Youtube:hover {
-      background-color: var(--secondary);
-    }
-
-    #theme-toggle {
-      display: block;
-      margin: 10px auto;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background-color: var(--secondary);
-      color: #fff;
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
       font-family: var(--font-body);
+      cursor: pointer;
+      border: none;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
     }
 
-    #theme-toggle:hover {
-      background-color: var(--primary);
+    .link-btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(4, 102, 200, 0.25);
+    }
+
+    .link-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(4, 102, 200, 0.35);
+    }
+
+    .link-btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .link-btn-outline:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--card-border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      nav { padding: 0.75rem 1.1rem; }
+      .hero { padding: 2.5rem 1rem 2rem; }
+      .game-grid { padding: 0 1rem 1.5rem; gap: 1rem; }
     }
   </style>
-
 </head>
 <body>
-  <audio autoplay loop>
-    <source src="https://file.garden/aQ16Sa80InNm8CXa/godotstheme.mp3" type="audio/mpeg"> Your browser does not support the audio element. 
-  </audio>
-  <button id="theme-toggle">Toggle Dark/Light</button>
 
-  <h1 class="Domain">MandA.com</h1>
-  <h3 class="Domain">The Best Website To Play Games!</h3>
+  <!-- Background music -->
+  <audio id="bg-music" loop>
+    <source src="bgmusic.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Nav -->
+  <nav>
+    <span class="nav-logo">MandA.com</span>
+    <button id="theme-toggle">&#9680; Theme</button>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1>MandA.com</h1>
+    <p>The Best Website To Play Games!</p>
+  </header>
+
+  <!-- Games -->
+  <h2 class="section-label">Games</h2>
+  <p class="section-sub">Pick a game and start playing</p>
 
   <div class="game-grid">
     <a href="Spend 1 trillion dollars.html" class="game-card">
       <img src="https://cdn.pixabay.com/photo/2023/03/28/01/10/money-7881948_1280.jpg" alt="Spend One Trillion Dollars">
-      <div class="game-title">Spend One Trillion Dollars</div>
+      <div class="card-body"><div class="game-title">Spend One Trillion Dollars</div></div>
     </a>
-<a href="Tree clicker.html" class="game-card">
-  <img src="https://www.thetreecenter.com/c/uploads/Bur_Oak_Tree_2-2-jpg-webp-e1694616986203-768x768.avif" alt="Tree Clicker">
-  <div class="game-title">Tree Clicker</div>
-</a>
 
-<a href="Race car.html" class="game-card">
-  <img src="https://th.bing.com/th/id/R.03ac7b1934eb89076b28d3b84058b8a6?rik=DoksYDim3trRsg&pid=ImgRaw&r=0" alt="Race Car">
-  <div class="game-title">Race Car</div>
-</a>
+    <a href="Tree clicker.html" class="game-card">
+      <img src="https://www.thetreecenter.com/c/uploads/Bur_Oak_Tree_2-2-jpg-webp-e1694616986203-768x768.avif" alt="Tree Clicker">
+      <div class="card-body"><div class="game-title">Tree Clicker</div></div>
+    </a>
 
-<a href="Card Game.html" class="game-card">
-  <img src="https://thumbs.dreamstime.com/b/deck-cards-poker-all-spread-laid-out-symbol-gambling-to-gamble-46335018.jpg" alt="Card Game">
-  <div class="game-title">Card Game</div>
-</a>
+    <a href="Race car.html" class="game-card">
+      <img src="https://th.bing.com/th/id/R.03ac7b1934eb89076b28d3b84058b8a6?rik=DoksYDim3trRsg&pid=ImgRaw&r=0" alt="Race Car">
+      <div class="card-body"><div class="game-title">Race Car</div></div>
+    </a>
 
-<a href="School Simulator.html" class="game-card">
-  <img src="https://clipartcraft.com/images/school-clipart-transparent-background-3.png" alt="School Simulator">
-  <div class="game-title">School Simulator</div>
-</a>
+    <a href="Card Game.html" class="game-card">
+      <img src="https://thumbs.dreamstime.com/b/deck-cards-poker-all-spread-laid-out-symbol-gambling-to-gamble-46335018.jpg" alt="Card Game">
+      <div class="card-body"><div class="game-title">Card Game</div></div>
+    </a>
 
-<a href="Street Market Negotiator.html" class="game-card">
-  <img src="https://static.vecteezy.com/system/resources/previews/034/070/601/non_2x/a-street-market-with-lots-of-fruits-ai-generated-photo.jpg" alt="Street Market Negotiator">
-  <div class="game-title">Street Market Negotiator</div>
-</a>
+    <a href="School Simulator.html" class="game-card">
+      <img src="https://clipartcraft.com/images/school-clipart-transparent-background-3.png" alt="School Simulator">
+      <div class="card-body"><div class="game-title">School Simulator</div></div>
+    </a>
 
-<a href="Populationcounter.html" class="game-card">
-  <img src="https://adpaascu.wordpress.com/wp-content/uploads/2012/03/green-globe-jpg.png" alt="Population Counter">
-  <div class="game-title">Population Counter</div>
-</a>
+    <a href="Street Market Negotiator.html" class="game-card">
+      <img src="https://static.vecteezy.com/system/resources/previews/034/070/601/non_2x/a-street-market-with-lots-of-fruits-ai-generated-photo.jpg" alt="Street Market Negotiator">
+      <div class="card-body"><div class="game-title">Street Market Negotiator</div></div>
+    </a>
 
-<a href="color_dash_game.html" class="game-card">
-  <img src="https://atb-tech.com/wp-content/uploads/2017/04/New-Tech-Gadgets-for-2017.jpg" alt="Color Dash Game">
-  <div class="game-title">Color Dash Game</div>
-</a>
-    
-<a href="brickbreaker.html" class="game-card">
-  <img src="https://www.shutterstock.com/image-photo/hole-wall-bricks-against-transparent-600nw-2458899719.jpg" alt="Brick-breaker">
-  <div class="game-title">Brick Breaker</div>
-</a>
+    <a href="Populationcounter.html" class="game-card">
+      <img src="https://adpaascu.wordpress.com/wp-content/uploads/2012/03/green-globe-jpg.png" alt="Population Counter">
+      <div class="card-body"><div class="game-title">Population Counter</div></div>
+    </a>
 
+    <a href="color_dash_game.html" class="game-card">
+      <img src="https://atb-tech.com/wp-content/uploads/2017/04/New-Tech-Gadgets-for-2017.jpg" alt="Color Dash Game">
+      <div class="card-body"><div class="game-title">Color Dash Game</div></div>
+    </a>
+
+    <a href="brickbreaker.html" class="game-card">
+      <img src="https://www.shutterstock.com/image-photo/hole-wall-bricks-against-transparent-600nw-2458899719.jpg" alt="Brick Breaker">
+      <div class="card-body"><div class="game-title">Brick Breaker</div></div>
+    </a>
   </div>
 
-<a href="https://www.youtube.com/@ThatsPerfect-y4o"><button class="Youtube">That's Perfect</button></a> <a href="https://www.youtube.com/@broskiwhy"><button class="Youtube">BroskiWhy</button></a> <a href="Donation.html"><button class="Youtube">Donations</button></a>
+  <!-- Links -->
+  <div class="links-section">
+    <a href="https://www.youtube.com/@ThatsPerfect-y4o" class="link-btn link-btn-primary">&#9654; That's Perfect</a>
+    <a href="https://www.youtube.com/@broskiwhy" class="link-btn link-btn-primary">&#9654; BroskiWhy</a>
+    <a href="Donation.html" class="link-btn link-btn-outline">&#9829; Donations</a>
+  </div>
 
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 MandA.com &mdash; All rights reserved.
+  </footer>
 
+  <!-- Scripts -->
+  <script>
+    const bgMusic = document.getElementById('bg-music');
+    bgMusic.volume = 0.2;
+    bgMusic.play().catch(() => {
+      console.log('Autoplay blocked, will start on first click.');
+    });
+    document.body.addEventListener('click', () => { bgMusic.play(); }, { once: true });
+  </script>
 
+  <script>
+    let typed = "";
+    const secret = "sammed";
+    document.addEventListener("keyup", (e) => {
+      typed += e.key.toLowerCase();
+      if (typed.length > secret.length) typed = typed.slice(-secret.length);
+      if (typed === secret) { window.location.href = "thing.html"; typed = ""; }
+    });
+  </script>
 
-<audio id="bg-music" loop>
-  <source src="bgmusic.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
-<script>
-  const bgMusic = document.getElementById('bg-music');
-
-  // set volume (0.0 - 1.0)
-  bgMusic.volume = 0.2;
-
-  // Try autoplay
-  bgMusic.play().catch(() => {
-    console.log('Autoplay blocked, will start on first click.');
-  });
-
-  // Fallback: start music on first click anywhere
-  document.body.addEventListener('click', () => {
-    bgMusic.play();
-  }, { once: true });
-</script>
-
-<script>
-let typed = "";
-const secret = "sammed";
-
-// listen to any key the user types
-document.addEventListener("keyup", (e) => {
-    typed += e.key.toLowerCase();
-
-    // keep only the last N chars
-    if (typed.length > secret.length) typed = typed.slice(-secret.length);
-
-    if (typed === secret) {
-        // redirect current tab to your tracker HTML
-        window.location.href = "thing.html";
-        typed = "";
-    }
-});
-</script>
-
-
-
-
-  
   <script>
     const toggleBtn = document.getElementById('theme-toggle');
     toggleBtn.addEventListener('click', () => {
@@ -258,7 +404,6 @@ document.addEventListener("keyup", (e) => {
         document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
     });
   </script>
-  
+
 </body>
 </html>
-
